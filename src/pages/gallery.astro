@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const images = [
+ ["https://static.wixstatic.com/media/6d8eb9_5a52454d317b43a984f28740a8cd072a~mv2.jpg","School life at SWEEP","School life"],
+ ["https://static.wixstatic.com/media/6d8eb9_3b8307d3cbde4b518387d7082ee32dfb~mv2.jpg","A moment from the SWEEP school community","Our community"],
+ ["https://static.wixstatic.com/media/6d8eb9_8087b3b328bd4e13b865545df154df87~mv2.jpg","Learning and activities at SWEEP","Learning together"],
+ ["https://static.wixstatic.com/media/6d8eb9_6d91acefb903499f8054ad77b007e21b~mv2.jpg","A school moment from the existing gallery","Everyday moments"]
+];
+---
+<BaseLayout title="Gallery" description="Explore photographs from the SWEEP Schools community. Images are drawn from the school's existing public gallery and require permission checks before launch.">
+<section class="page-hero"><div class="container"><span class="eyebrow">Life at SWEEP</span><h1>Learning, growing<br />and belonging.</h1><p>A glimpse of the people, activities and everyday moments that make up the SWEEP Schools community.</p></div></section>
+<section class="section"><div class="container"><div class="fee-notice" style="margin-bottom:2rem"><strong>Preview note:</strong> These image placements use image URLs from the existing SWEEP Schools website. Before launch, each image must be checked for quality, correct context, permission to reuse and appropriate consent for identifiable learners.</div><div class="gallery-page-grid">{images.map(([src,alt,label])=><figure><img src={src} alt={alt} loading="lazy" decoding="async" /><figcaption>{label}</figcaption></figure>)}</div></div></section>
+</BaseLayout>

@@ -1,0 +1,33 @@
+name: Website quality checks
+on:
+  pull_request:
+  push:
+    branches: [main, "feat/**", "fix/**"]
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - run: npm run check
+      - run: npm run build
+      - name: Verify expected routes
+        run: |
+          test -f dist/index.html
+          test -f dist/pre-school/index.html
+          test -f dist/primary-school/index.html
+          test -f dist/admissions/index.html
+          test -f dist/fees/index.html
+          test -f dist/gallery/index.html
+          test -f dist/parent-portal/index.html
+          test -f dist/privacy/index.html
+          test -f dist/terms/index.html
