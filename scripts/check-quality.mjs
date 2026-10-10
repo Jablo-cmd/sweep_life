@@ -139,6 +139,14 @@ try {
   failures.push("primary-school/index.html: unable to inspect primary term dates");
 }
 
+const treeImageUrl = "https://static.wixstatic.com/media/6d8eb9_5a52454d317b43a984f28740a8cd072a~mv2.jpg";
+const retiredTreeImageUrl = "https://static.wixstatic.com/media/81c8dfd936fb44beafda0fadfd156dd9.jpg";
+let renderedHtml = "";
+for (const file of htmlFiles) renderedHtml += await readFile(file, "utf8");
+const treeImageCount = renderedHtml.split(treeImageUrl).length - 1;
+if (treeImageCount !== 1) failures.push("tree photograph: expected exactly one use across the generated site, found " + treeImageCount);
+if (renderedHtml.includes(retiredTreeImageUrl)) failures.push("tree photograph: retired image URL is still present in generated pages");
+
 const galleryPath = path.join(root, "gallery", "index.html");
 try {
   const gallery = await readFile(galleryPath, "utf8");
