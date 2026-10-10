@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { siteUrl, productionIndexingEnabled } from "../lib/site-config";
+
+interface Props {
+  title: string;
+  description: string;
+  noIndex?: boolean;
+}
+
+const { title, description, noIndex = false } = Astro.props;
+const fullTitle = title === "Home"
+  ? "SWEEP Schools | A foundation for the journey ahead"
+  : `${title} | SWEEP Schools`;
+
+// A canonical host is deliberately optional until the school confirms domain
+// ownership and the production hostname. Preview builds are noindex by default.
+const canonicalUrl = productionIndexingEnabled && siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
+const shouldNoIndex = noIndex || !productionIndexingEnabled;
+const organizationSchema = productionIndexingEnabled && siteUrl && !noIndex
+  ? JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "SWEEP Schools",
+      "url": siteUrl,
+      "telephone": "+27116805938",
+      "email": "schools@sweeplife.co.za",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4 Burger Street, corner Burger and Swartgoud Streets",
+        "addressLocality": "Johannesburg",
+        "addressRegion": "Gauteng",
+        "postalCode": "2091",
+        "addressCountry": "ZA"
+      }
+    })
+  : undefined;
+---
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#352243" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_ZA" />
+    <meta property="og:site_name" content="SWEEP Schools" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {organizationSchema && <script type="application/ld+json" set:html={organizationSchema} />}
+    {shouldNoIndex && <meta name="robots" content="noindex, nofollow" />}
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader />
+    <main id="main-content"><slot /></main>
+    <SiteFooter />
+  </body>
+</html>

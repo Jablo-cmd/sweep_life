@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Admissions" description="Contact SWEEP Schools in Suideroord, Johannesburg, to enquire about SWEEP Kidz Pre-School or SWEEP Academy Primary School admissions.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Your child’s next chapter</span>
+      <h1>Start a conversation<br />with SWEEP Schools.</h1>
+      <p>Every child’s journey is different. Contact the school to discuss the appropriate phase, current availability, admissions requirements and next steps.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container content-grid">
+      <div class="prose">
+        <h2>Admissions enquiries</h2>
+        <p>SWEEP Schools includes SWEEP Kidz Pre-School and SWEEP Academy Primary School. An enquiry is the first step in learning more about the school and its current admissions process; it does not constitute an application or guarantee a place.</p>
+        <h2>Prepare an enquiry</h2>
+        <p>Complete the fields below to prepare an email using your device’s email application. The website does not send or store this information. If no email application opens, contact the school using the details alongside this form.</p>
+        <form class="enquiry-form" id="admissions-enquiry-form">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="guardian-name">Parent or guardian name <span aria-hidden="true">*</span></label>
+              <input id="guardian-name" name="guardianName" autocomplete="name" required maxlength="100" />
+            </div>
+            <div class="form-field">
+              <label for="guardian-email">Your email address <span aria-hidden="true">*</span></label>
+              <input id="guardian-email" name="guardianEmail" type="email" autocomplete="email" required maxlength="254" />
+            </div>
+            <div class="form-field">
+              <label for="guardian-phone">Contact number (optional)</label>
+              <input id="guardian-phone" name="guardianPhone" type="tel" autocomplete="tel" maxlength="30" />
+            </div>
+            <div class="form-field">
+              <label for="school-phase">School phase <span aria-hidden="true">*</span></label>
+              <select id="school-phase" name="schoolPhase" required>
+                <option value="">Choose a phase</option>
+                <option value="SWEEP Kidz Pre-School">SWEEP Kidz Pre-School</option>
+                <option value="SWEEP Academy Primary School">SWEEP Academy Primary School</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-field form-field-wide">
+              <label for="child-age-grade">Child’s age or intended grade (optional)</label>
+              <input id="child-age-grade" name="childAgeGrade" maxlength="80" placeholder="For example, 3 years old or Grade 2" />
+            </div>
+            <div class="form-field form-field-wide">
+              <label for="enquiry-message">How can the school help? <span aria-hidden="true">*</span></label>
+              <textarea id="enquiry-message" name="message" rows="5" required maxlength="2000" placeholder="Tell the school what you would like to know. Please do not include identity numbers, medical details or sensitive documents."></textarea>
+            </div>
+          </div>
+          <p class="form-hint">Your details remain in this page until you submit. Selecting “Prepare email” opens your email application with the enquiry prefilled; review it before sending. This page does not submit to a school server.</p>
+          <button class="button" type="submit">Prepare email <span aria-hidden="true">↗</span></button>
+          <p class="form-status" id="admissions-form-status" role="status" aria-live="polite"></p>
+        </form>
+        <h2>Before you apply</h2>
+        <ul>
+          <li>Confirm which age group or grade is appropriate for your child.</li>
+          <li>Ask whether places are currently available.</li>
+          <li>Confirm which application forms and supporting documents are required.</li>
+          <li>Request current fees, payment arrangements and any additional costs.</li>
+          <li>Ask whether a school visit or meeting can be arranged.</li>
+        </ul>
+        <div class="fee-notice"><strong>Important:</strong> Admissions requirements, availability and documentation must be confirmed directly with the school. This enquiry form does not constitute an application or guarantee a place.</div>
+        <h2>Contact the school</h2>
+        <p>Please do not email sensitive identity or learner documents until the school confirms a secure submission method.</p>
+        <div class="button-row">
+          <a class="button button-outline" href="mailto:schools@sweeplife.co.za?subject=SWEEP%20Schools%20Admissions%20Enquiry">Open a blank email</a>
+          <a class="button button-outline" href="tel:+27116805938">Call the school</a>
+        </div>
+      </div>
+      <aside class="info-card">
+        <h3>Admissions contact</h3>
+        <p><strong>Telephone</strong><br /><a href="tel:+27116805938">011 680 5938</a></p>
+        <p><strong>Email</strong><br /><a href="mailto:schools@sweeplife.co.za">schools@sweeplife.co.za</a></p>
+        <p><strong>Address</strong><br />4 Burger Street, corner Burger and Swartgoud Streets, Suideroord, Johannesburg, 2091</p>
+        <p class="muted">These details are from the public website and must be reconfirmed before launch.</p>
+      </aside>
+    </div>
+  </section>
+  <script>
+    const admissionsForm = document.querySelector("#admissions-enquiry-form");
+    const admissionsStatus = document.querySelector("#admissions-form-status");
+    admissionsForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!(admissionsForm instanceof HTMLFormElement) || !admissionsForm.reportValidity()) return;
+      const data = new FormData(admissionsForm);
+      const fields = [
+        ["Parent or guardian", "guardianName"],
+        ["Email", "guardianEmail"],
+        ["Telephone", "guardianPhone"],
+        ["School phase", "schoolPhase"],
+        ["Child's age or grade", "childAgeGrade"],
+        ["Enquiry", "message"]
+      ];
+      const body = fields
+        .map(([label, key]) => `${label}: ${String(data.get(key) || "").trim() || "Not provided"}`)
+        .join("\n\n");
+      const subject = encodeURIComponent("SWEEP Schools admissions enquiry");
+      const mailto = `mailto:schools@sweeplife.co.za?subject=${subject}&body=${encodeURIComponent(body)}`;
+      if (admissionsStatus) admissionsStatus.textContent = "Opening your email application. Please review the message and send it from your email application.";
+      window.location.href = mailto;
+    });
+  </script>
+</BaseLayout>
