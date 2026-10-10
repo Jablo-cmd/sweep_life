@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feat/website-foundation
+      - fix/sweep-distinct-school-identity
   workflow_dispatch:
 
 permissions:
