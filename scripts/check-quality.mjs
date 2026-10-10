@@ -78,7 +78,10 @@ for (const file of htmlFiles) {
   }
 }
 
-const faviconPath = path.join(root, "favicon.svg");\ntry { await access(faviconPath); } catch { failures.push("favicon.svg: missing site icon asset"); }\n\nconst robotsPath = path.join(root, "robots.txt");
+const faviconPath = path.join(root, "favicon.svg");
+try { await access(faviconPath); } catch { failures.push("favicon.svg: missing site icon asset"); }
+
+const robotsPath = path.join(root, "robots.txt");
 try {
   const robots = await readFile(robotsPath, "utf8");
   if (!/User-agent:\s*\*/i.test(robots)) failures.push("robots.txt: missing wildcard user-agent rule");
