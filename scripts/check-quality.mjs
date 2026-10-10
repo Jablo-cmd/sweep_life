@@ -147,6 +147,26 @@ const treeImageCount = renderedHtml.split(treeImageUrl).length - 1;
 if (treeImageCount !== 1) failures.push("tree photograph: expected exactly one use across the generated site, found " + treeImageCount);
 if (renderedHtml.includes(retiredTreeImageUrl)) failures.push("tree photograph: retired image URL is still present in generated pages");
 
+const homePath = path.join(root, "index.html");
+try {
+  const home = await readFile(homePath, "utf8");
+  const homeImageSources = [...home.matchAll(/<img\\b[^>]*\\bsrc=[\"']([^\"']+)[\"']/gi)].map((match) => match[1]);
+  const seenHomeSources = new Set();
+  const duplicateHomeSources = new Set();
+  for (const src of homeImageSources) {
+    if (seenHomeSources.has(src)) duplicateHomeSources.add(src);
+    seenHomeSources.add(src);
+  }
+  if (duplicateHomeSources.size) {
+    failures.push("index.html: repeated image source(s) on the home page: " + [...duplicateHomeSources].join(", "));
+  }
+  if (homeImageSources.length !== seenHomeSources.size) {
+    failures.push("index.html: home page images must each use a distinct source URL");
+  }
+} catch {
+  failures.push("index.html: unable to verify home page image uniqueness");
+}
+
 const galleryPath = path.join(root, "gallery", "index.html");
 try {
   const gallery = await readFile(galleryPath, "utf8");
