@@ -19,6 +19,7 @@ jobs:
       - run: npm install
       - run: npm run check
       - run: npm run build
+      - run: npm run test:routes
       - name: Verify expected routes
         run: |
           test -f dist/index.html
@@ -27,6 +28,8 @@ jobs:
           test -f dist/admissions/index.html
           test -f dist/fees/index.html
           test -f dist/gallery/index.html
+          test -f dist/about/index.html
+          test -f dist/contact/index.html
           test -f dist/parent-portal/index.html
           test -f dist/privacy/index.html
           test -f dist/terms/index.html
