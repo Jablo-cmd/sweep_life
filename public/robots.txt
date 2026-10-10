@@ -1,3 +1,3 @@
-# Preview-first project. Review the production host and indexing policy before launch.
+# Preview-only robots policy. Before production launch, replace this with a reviewed crawl policy and sitemap URL.
 User-agent: *
-Disallow: /parent-portal/
+Disallow: /
