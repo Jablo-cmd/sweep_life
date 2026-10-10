@@ -19,6 +19,15 @@ The implementation references original Wix media URLs from the public source web
   - `6d8eb9_3b8307d3cbde4b518387d7082ee32dfb~mv2.jpg`
   - `6d8eb9_8087b3b328bd4e13b865545df154df87~mv2.jpg`
   - `6d8eb9_6d91acefb903499f8054ad77b007e21b~mv2.jpg`
+  - `6d8eb9_6358bed11ed6445297f9d320f36e3caa~mv2.jpg`
+  - `6d8eb9_2f037140ec6543e18b00bb2a30b7c5b6~mv2.jpg`
+  - `6d8eb9_2359c7052ffd4dfcadcc2e08da50d01f~mv2.jpg`
+  - `6d8eb9_68e8d8e0626b4000a4a6c113623f6e7d~mv2.jpg`
+  - `6d8eb9_fa55abcec73f4a7f89ea670546e3e4e0~mv2.jpg`
+  - `6d8eb9_3a167a4233d7447692a0d5f9c0c48c90~mv2.jpg`
+  - `6d8eb9_a9e50f8f104e47fdaae6b77a75896b3f~mv2.jpg`
+  - `6d8eb9_02f1013799284a8e95c5147547ec068f~mv2.jpg`
+  - `6d8eb9_8ba2d2946d0f4abaaed753e803e305cb~mv2.jpg`
 
 ## Content handling rules
 - Preserve meaning, school values, Christian identity, educational philosophy and distinctive expressions.
