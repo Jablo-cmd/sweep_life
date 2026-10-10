@@ -77,6 +77,18 @@ for (const file of htmlFiles) {
   if ((!productionIndexing || privateRoute) && hasStructuredData) {
     failures.push(page + ": preview/private route must not emit production organization structured data");
   }
+  if (productionIndexing && !privateRoute && hasStructuredData) {
+    const schemaText = html.match(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/i)?.[1];
+    try {
+      const schema = JSON.parse(schemaText ?? "null");
+      const expectedOrigin = process.env.PUBLIC_SITE_URL.trim().replace(/\/$/, "");
+      if (schema?.["@type"] !== "EducationalOrganization" || schema?.url !== expectedOrigin) {
+        failures.push(page + ": structured data type or canonical origin is incorrect");
+      }
+    } catch {
+      failures.push(page + ": organization structured data is not valid JSON");
+    }
+  }
   if ((!productionIndexing || privateRoute) && !hasNoIndex) {
     failures.push(page + ": route should remain noindex until explicitly enabled for production");
   }
