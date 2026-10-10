@@ -29,7 +29,7 @@ The public site identifies SWEEP Kidz Pre-School and SWEEP Academy Primary Schoo
 - GitHub Actions workflow for Astro checks, static build and expected route output checks
 
 ## Known gaps / not yet implemented
-- No lockfile yet; dependency installation should be reproducible before production release. CI currently uses `npm install`, not `npm ci`.
+- A committed npm lockfile now pins the resolved dependency tree; CI uses `npm ci` for reproducible installation.
 - Automated generated-output checks now cover expected routes, unique titles, descriptions, one H1 per page, image alt text, and safe noindex defaults. These are useful static checks, not a substitute for browser, assistive-technology, or user-flow testing.
 - No browser-based visual regression or full accessibility/user-flow suite yet.
 - No automated Lighthouse/Core Web Vitals budget yet.
