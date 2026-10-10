@@ -174,3 +174,71 @@ a:focus-visible,summary:focus-visible{outline:3px solid #4295f4;outline-offset:4
  .page-hero-grid{gap:2rem}
  .page-hero img{height:280px;border-radius:14px}
 }
+
+
+/* SWEEP redesign v2 — distinctive aubergine, coral and warm ivory identity.
+   Intentionally separate from Funda360's blue/navy palette. */
+:root{
+ --ink:#282136;--muted:#706779;--green:#4C315E;--green-2:#694778;
+ --sage:#F2EAF4;--cream:#FBF6F0;--paper:#FFFCF8;--gold:#E56F58;
+ --line:#E8DDE8;--radius:18px;--shadow:0 18px 55px rgba(55,35,65,.10);
+ font-family:"DM Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper)
+}
+body{background:var(--paper);color:var(--ink)}
+h1,h2,h3{font-family:"Manrope","DM Sans",sans-serif;color:#282136;letter-spacing:-.05em}
+a:focus-visible,summary:focus-visible{outline-color:#E56F58}
+.eyebrow{color:#A34F79}
+.eyebrow:before{background:#E56F58}
+.button{background:#4C315E;border-color:#4C315E;border-radius:7px;box-shadow:0 8px 18px rgba(76,49,94,.14)}
+.button:hover{background:#352243;border-color:#352243;box-shadow:0 12px 24px rgba(76,49,94,.2)}
+.button-outline{background:transparent;color:#4C315E;border-color:#D8C7DB;box-shadow:none}
+.button-outline:hover{background:#F2EAF4;color:#352243;border-color:#B89BC0}
+.text-link{color:#A34F79}
+.site-header{background:rgba(255,252,248,.96);border-bottom-color:#E8DDE8}
+.topline{background:#352243;color:#F8ECF5}
+.brand-mark{background:#4C315E;box-shadow:0 7px 16px rgba(76,49,94,.18)}
+.brand-copy strong{color:#352243}
+.brand-copy small{color:#9B6E9E}
+.desktop-nav>a:not(.button):hover,.desktop-nav>a[aria-current=page]{color:#A34F79}
+.desktop-nav>a[aria-current=page]:after{background:#E56F58}
+.hero{background:linear-gradient(112deg,#FFFCF8 0%,#FFFCF8 54%,#F5EAF1 100%)}
+.hero h1 em{color:#A34F79}
+.hero-image{box-shadow:0 28px 70px rgba(55,35,65,.15)}
+.image-note{border-color:#E8DDE8;box-shadow:0 18px 42px rgba(55,35,65,.15)}
+.image-note strong{color:#A34F79}
+.hero-ornament{border-color:rgba(163,79,121,.14)}
+.trust-strip{border-color:#E8DDE8}
+.trust-item{border-color:#E8DDE8}
+.trust-icon{background:#F2EAF4;color:#A34F79}
+.trust-item strong{color:#4C315E}
+.section-heading p{color:#706779}
+.split-image{box-shadow:0 20px 50px rgba(55,35,65,.1)}
+.image-caption{border-color:#E8DDE8;box-shadow:0 16px 36px rgba(55,35,65,.12)}
+.image-caption strong{color:#A34F79}
+.phase-section{background:#F8F0F5}
+.phase-card{border-color:#E8DDE8;box-shadow:0 5px 22px rgba(55,35,65,.035)}
+.phase-card:hover{box-shadow:0 20px 44px rgba(55,35,65,.10)}
+.card-kicker,.value-number{color:#A34F79}
+.phase-card p,.value-card p{color:#706779}
+.value-card{border-color:#E8DDE8;background:#FFFCF8}
+.quote-band{background:#352243}
+.quote-mark{color:#F39B83}
+.quote-grid cite{color:#E7CDE0}
+.gallery-tile{background:#F2EAF4}
+.cta-band{background:#F5EAF1;border-color:#E8DDE8}
+.page-hero{background:#F8F0F5}
+.page-hero img{box-shadow:0 20px 50px rgba(55,35,65,.12)}
+.info-card{background:#F8F0F5;border-color:#E8DDE8}
+.resource-row,.contact-item{border-color:#E8DDE8}
+.portal-panel{border-color:#E8DDE8;box-shadow:0 20px 60px rgba(55,35,65,.08)}
+.portal-symbol{background:#F2EAF4;color:#A34F79}
+.site-footer{background:#281A34}
+.brand-light .brand-mark{background:#F7E9F1;color:#4C315E}
+.brand-light .brand-copy strong{color:#fff}
+.brand-light .brand-copy small{color:#E4C7DE}
+.footer-main p,.footer-main>div:not(:first-child) a{color:#E0D3E5}
+.footer-note{color:#C9A8C7}
+.footer-bottom{border-color:rgba(232,221,232,.17);color:#C9B8D0}
+@media(max-width:560px){
+ .hero{background:linear-gradient(180deg,#FFFCF8 0%,#FFFCF8 60%,#F5EAF1 100%)}
+}
