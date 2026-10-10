@@ -2,9 +2,49 @@
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-interface Props { title: string; description: string; noIndex?: boolean; }
+
+interface Props {
+  title: string;
+  description: string;
+  noIndex?: boolean;
+}
+
 const { title, description, noIndex = false } = Astro.props;
-const fullTitle = title === "Home" ? "SWEEP Schools | A foundation for the journey ahead" : `${title} | SWEEP Schools`;
+const fullTitle = title === "Home"
+  ? "SWEEP Schools | A foundation for the journey ahead"
+  : `${title} | SWEEP Schools`;
+
+// A canonical host is deliberately optional until the school confirms domain
+// ownership and the production hostname. Preview builds are noindex by default.
+const configuredSiteUrl = import.meta.env.PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
+const canonicalUrl = configuredSiteUrl
+  ? new URL(Astro.url.pathname, configuredSiteUrl).toString()
+  : undefined;
+const shouldNoIndex = noIndex || import.meta.env.PUBLIC_INDEXING_ENABLED !== "true";
 ---
-<!doctype html><html lang="en-ZA"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#173c34" /><meta name="description" content={description} />
-    {noIndex && <meta name="robots" content="noindex, nofollow" />}<meta property="og:type" content="website" /><meta property="og:site_name" content="SWEEP Schools" /><meta property="og:title" content={fullTitle} /><meta property="og:description" content={description} /><meta name="color-scheme" content="light" /><title>{fullTitle}</title></head><body><a class="skip-link" href="#main-content">Skip to content</a><SiteHeader /><main id="main-content"><slot /></main><SiteFooter /></body></html>
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#173c34" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_ZA" />
+    <meta property="og:site_name" content="SWEEP Schools" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {shouldNoIndex && <meta name="robots" content="noindex, nofollow" />}
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader />
+    <main id="main-content"><slot /></main>
+    <SiteFooter />
+  </body>
+</html>
