@@ -16,17 +16,19 @@ Source content reference: https://www.sweepschools.co.za/
 - Do not introduce credentials, real learner records, real parent identities or personal data.
 - Do not fabricate school facts, fees, staff names, facilities, results, testimonials, policies or image permissions.
 - Preserve the source school's meaning, Christian identity, educational philosophy and distinctive expressions while correcting grammar and improving presentation.
-- Treat the current implementation as an early scaffold, not a finished website.
+- Treat the current implementation as a reviewable preview, not a production-ready website.
 - If changes are recommended, provide exact file paths, evidence, severity, and a safe implementation sequence. Do not silently make broad changes.
 
 ## Required review passes
 
 ### 1. Repository and build integrity
 - Inspect every file and the complete git diff from `main`.
-- Run dependency installation, `npm run check`, and `npm run build`.
+- Run `npm ci`, `npm audit --audit-level=high`, `npm run check`, `npm run build`, `npm run test:routes`, and `npm run test:quality`.
+- Repeat the build and quality check with `PUBLIC_SITE_URL=https://preview.example.invalid` and `PUBLIC_INDEXING_ENABLED=true` to verify production indexing configuration.
 - Verify whether dependency versions are pinned reproducibly and whether a lockfile is needed.
 - Verify the workflow actually triggers, installs dependencies and checks all expected pages.
 - Confirm all expected routes are emitted, internal links resolve, assets exist and paths work with trailing slashes.
+- Inspect the committed lockfile and verify CI uses `npm ci`; check that dependency auditing fails on high/critical vulnerabilities.
 - Check for malformed JSX/Astro, invalid HTML nesting, broken attributes, console errors and hydration/runtime errors.
 - Report every command run and its real result; never claim tests passed if they were not run.
 
@@ -35,6 +37,7 @@ Source content reference: https://www.sweepschools.co.za/
 - Check navigation, text measure, image crops, overlapping elements, whitespace, hierarchy, contrast and consistent spacing.
 - Check reduced-motion settings, keyboard focus, touch target sizes, zoom/reflow and sticky/fixed elements.
 - Confirm that the school looks premium and contemporary without losing warmth or the Christian school identity.
+- Check the provisional `S` wordmark/favicon is clearly documented as a placeholder until official brand assets are supplied.
 - Flag typographic logo or other brand approximations that need official assets.
 
 ### 3. Source content and editorial fidelity
@@ -54,6 +57,7 @@ Source content reference: https://www.sweepschools.co.za/
 
 ### 5. SEO and discoverability
 - Check unique titles and descriptions, canonical URL strategy, robots rules, sitemap, Open Graph metadata, favicons, headings, internal links and structured data.
+- Verify both default preview mode (noindex, disallow, empty sitemap) and explicitly enabled production mode (canonical origin, sitemap URLs, public-page indexing, private-page noindex).
 - Check whether the portal, legal drafts or preview site could be indexed accidentally.
 - Verify local entity consistency (school names, address, phone, email) and do not mark up unverified facts.
 - Define a measured SEO checklist rather than promising rankings.
