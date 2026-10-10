@@ -98,6 +98,16 @@ try {
   failures.push("sitemap.xml: generated sitemap endpoint is missing");
 }
 
+const primaryPath = path.join(root, "primary-school", "index.html");
+try {
+  const primary = await readFile(primaryPath, "utf8");
+  const termTable = primary.match(/class=["']term-table["'][\\s\\S]*?<\\/table>/i)?.[0] ?? "";
+  const termRows = (termTable.match(/<tr\\b/gi) ?? []).length;
+  if (termRows !== 5) failures.push("primary-school/index.html: expected a 2026 term table with 4 terms and a header, found " + termRows + " rows");
+} catch {
+  failures.push("primary-school/index.html: unable to inspect primary term dates");
+}
+
 const galleryPath = path.join(root, "gallery", "index.html");
 try {
   const gallery = await readFile(galleryPath, "utf8");
