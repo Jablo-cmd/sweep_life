@@ -12,16 +12,18 @@ A complete, preview-first rebuild of the SWEEP Schools public website, with a se
 - Never use real learner data in development or test environments.
 - Do not represent this work as school-approved until the appropriate authorisation is obtained.
 
-## Initial delivery boundary
+## Current delivery boundary
 
-The first implementation phase is a local/preview-only public website foundation and an auditable project plan. Admissions submissions, content management, hosting, and parent-portal integration must not be connected to live systems until their requirements, data handling, and authorisation are confirmed.
+The feature branch contains a reviewable Astro static-site implementation. It includes a client-side admissions email builder that opens the visitor's email application; it does not submit to a server or store information. The parent portal remains an informational placeholder. No live systems are connected.
 
 ## Planned capabilities
 
 - Public pages for Home, SWEEP Kidz, SWEEP Academy, Admissions, Fees & Resources, Gallery, About, Contact, Privacy, and Terms.
 - Search-engine-friendly page structure and metadata.
 - Accessible, responsive layouts and optimised images.
-- Admissions enquiry flow designed for a later server-side integration.
+- Client-side admissions email builder with browser validation and clear disclosure that the visitor must send the email.
+- Environment-gated `robots.txt`, sitemap and canonical metadata; preview builds remain noindex by default.
+- Automated generated-output checks for routes, page titles, descriptions, headings, image alt attributes and indexing safeguards.
 - Secure parent portal as a separate release gate, with synthetic data only until authorised.
 
 ## Safe workflow
@@ -32,6 +34,21 @@ The first implementation phase is a local/preview-only public website foundation
 4. Review content accuracy, image permissions, accessibility, performance, SEO, forms, and security before any production deployment.
 5. Deploy only after documented authorisation, hosting/DNS verification, backup and rollback planning, and final school review.
 
+## Local development
+
+Requirements: Node.js 22 or compatible LTS and npm.
+
+```sh
+npm install
+npm run check
+npm run build
+npm run test:routes
+npm run test:quality
+npm run dev
+```
+
+For a production-indexable build, configure both `PUBLIC_SITE_URL` (the confirmed canonical HTTPS origin, without a trailing slash) and `PUBLIC_INDEXING_ENABLED=true`. Do not enable indexing until the school has confirmed domain ownership, approved content and authorised launch. With either setting absent, canonical URLs are omitted, the sitemap contains no public URLs, `robots.txt` disallows crawling, and pages carry `noindex, nofollow`.
+
 ## Status
 
-Repository bootstrap. Hosting and framework are provisional pending technical audit. The source website is https://www.sweepschools.co.za/.
+Reviewable preview under active development; not production-ready or school-approved. The framework and hosting target remain provisional pending the deployment audit. Source website: https://www.sweepschools.co.za/.
