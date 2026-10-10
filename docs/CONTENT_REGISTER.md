@@ -29,6 +29,9 @@ The implementation references original Wix media URLs from the public source web
   - `6d8eb9_02f1013799284a8e95c5147547ec068f~mv2.jpg`
   - `6d8eb9_8ba2d2946d0f4abaaed753e803e305cb~mv2.jpg`
 
+## Additional source details preserved
+- The primary-school page's published 2026 term dates are represented in the rebuild with an explicit pending-confirmation note. Reconfirm the calendar before publication because dates are time-sensitive.
+
 ## Content handling rules
 - Preserve meaning, school values, Christian identity, educational philosophy and distinctive expressions.
 - Correct spelling and grammar without rewriting the school's message.
