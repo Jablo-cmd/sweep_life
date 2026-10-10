@@ -29,17 +29,17 @@ The public site identifies SWEEP Kidz Pre-School and SWEEP Academy Primary Schoo
 - GitHub Actions workflow for Astro checks, static build and expected route output checks
 
 ## Known gaps / not yet implemented
-- No lockfile yet; dependency installation should be reproducible before production release.
+- No lockfile yet; dependency installation should be reproducible before production release. CI currently uses `npm install`, not `npm ci`.
 - Automated generated-output checks now cover expected routes, unique titles, descriptions, one H1 per page, image alt text, and safe noindex defaults. These are useful static checks, not a substitute for browser, assistive-technology, or user-flow testing.
 - No browser-based visual regression or full accessibility/user-flow suite yet.
 - No automated Lighthouse/Core Web Vitals budget yet.
-- Images reference Wix-hosted source URLs; they have not been downloaded, optimised, verified at full resolution or permission-cleared.
+- Images reference Wix-hosted source URLs; 13 gallery image URLs are registered, but they have not been visually verified, downloaded, optimised, or permission-cleared. Current alt text and captions are provisional.
 - No approved school logo or brand assets; the wordmark is a typographic placeholder.
 - No content-management system.
-- No functioning admissions form or server-side endpoint.
+- Admissions page has a browser-validated email builder that opens the visitor's mail application. There is no server-side submission, delivery confirmation, spam protection or central enquiry record.
 - No current fee PDFs or fee amounts published.
 - No portal authentication, user management, data source, API or learner data.
-- No analytics, Search Console, sitemap, canonical URLs, structured data or production domain configuration.
+- Sitemap, canonical URLs and robots policy are generated from environment configuration. They remain disabled in preview. Structured data, analytics, Search Console verification and production domain configuration are not yet implemented.
 - No approved privacy policy, terms, school legal entity, information officer, cookie policy or retention schedule.
 - No current staff list, principal message, team photos, confirmed admissions requirements or approved learner-photo consent register.
 - No deployment target or rollback/backup plan.
