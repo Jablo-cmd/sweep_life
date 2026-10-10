@@ -17,7 +17,7 @@ const fullTitle = title === "Home"
 
 // A canonical host is deliberately optional until the school confirms domain
 // ownership and the production hostname. Preview builds are noindex by default.
-const canonicalUrl = siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
+const canonicalUrl = productionIndexingEnabled && siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
 const shouldNoIndex = noIndex || !productionIndexingEnabled;
 ---
 <!doctype html>
