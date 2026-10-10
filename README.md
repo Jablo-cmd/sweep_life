@@ -39,7 +39,7 @@ The feature branch contains a reviewable Astro static-site implementation. It in
 Requirements: Node.js 22 or compatible LTS and npm.
 
 ```sh
-npm install
+npm ci
 npm run check
 npm run build
 npm run test:routes
