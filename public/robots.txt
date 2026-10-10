@@ -1,3 +1,0 @@
-# Preview-only robots policy. Before production launch, replace this with a reviewed crawl policy and sitemap URL.
-User-agent: *
-Disallow: /
