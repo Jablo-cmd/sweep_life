@@ -39,7 +39,7 @@ The public site identifies SWEEP Kidz Pre-School and SWEEP Academy Primary Schoo
 - Admissions page has a browser-validated email builder that opens the visitor's mail application. There is no server-side submission, delivery confirmation, spam protection or central enquiry record.
 - No current fee PDFs or fee amounts published.
 - No portal authentication, user management, data source, API or learner data.
-- Sitemap, canonical URLs and robots policy are generated from environment configuration. They remain disabled in preview. Structured data, analytics, Search Console verification and production domain configuration are not yet implemented.
+- Sitemap, canonical URLs, robots policy and EducationalOrganization JSON-LD are generated only when both the validated HTTPS origin and explicit production-indexing flag are configured. Preview builds omit canonical/schema URLs and remain noindex/disallowed. Analytics, Search Console verification and production domain configuration are not yet set up.
 - No approved privacy policy, terms, school legal entity, information officer, cookie policy or retention schedule.
 - No current staff list, principal message, team photos, confirmed admissions requirements or approved learner-photo consent register.
 - No deployment target or rollback/backup plan.
