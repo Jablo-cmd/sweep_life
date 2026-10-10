@@ -50,7 +50,7 @@ jobs:
           test -f dist/privacy/index.html
           test -f dist/terms/index.html
   bootstrap-lockfile:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feat/website-foundation'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/feat/website-foundation') || (github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'feat/website-foundation' && github.event.pull_request.head.repo.full_name == github.repository)
     needs: verify
     permissions:
       contents: write
