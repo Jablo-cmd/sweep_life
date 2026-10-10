@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import { siteUrl, productionIndexingEnabled } from "../lib/site-config";
 
 interface Props {
   title: string;
@@ -16,11 +17,8 @@ const fullTitle = title === "Home"
 
 // A canonical host is deliberately optional until the school confirms domain
 // ownership and the production hostname. Preview builds are noindex by default.
-const configuredSiteUrl = import.meta.env.PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
-const canonicalUrl = configuredSiteUrl
-  ? new URL(Astro.url.pathname, configuredSiteUrl).toString()
-  : undefined;
-const shouldNoIndex = noIndex || import.meta.env.PUBLIC_INDEXING_ENABLED !== "true" || !configuredSiteUrl;
+const canonicalUrl = siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
+const shouldNoIndex = noIndex || !productionIndexingEnabled;
 ---
 <!doctype html>
 <html lang="en-ZA">
