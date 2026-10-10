@@ -75,6 +75,28 @@ for (const file of htmlFiles) {
   }
 }
 
+const robotsPath = path.join(root, "robots.txt");
+try {
+  const robots = await readFile(robotsPath, "utf8");
+  if (!/User-agent:\s*\*/i.test(robots) || !/Disallow:\s*\//i.test(robots)) {
+    failures.push("robots.txt: preview must disallow crawling until production indexing is explicitly enabled");
+  }
+} catch {
+  failures.push("robots.txt: generated crawl policy is missing");
+}
+
+const sitemapPath = path.join(root, "sitemap.xml");
+try {
+  const sitemap = await readFile(sitemapPath, "utf8");
+  if (!sitemap.includes("http://www.sitemaps.org/schemas/sitemap/0.9")) {
+    failures.push("sitemap.xml: missing sitemap XML namespace");
+  }
+  if (process.env.PUBLIC_INDEXING_ENABLED !== "true" && /<loc>/i.test(sitemap)) {
+    failures.push("sitemap.xml: preview must not publish crawlable production URLs");
+  }
+} catch {
+  failures.push("sitemap.xml: generated sitemap endpoint is missing");
+}
 const galleryPath = path.join(root, "gallery", "index.html");
 try {
   const gallery = await readFile(galleryPath, "utf8");
