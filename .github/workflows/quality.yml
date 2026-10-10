@@ -49,3 +49,29 @@ jobs:
           test -f dist/parent-portal/index.html
           test -f dist/privacy/index.html
           test -f dist/terms/index.html
+  bootstrap-lockfile:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feat/website-foundation'
+    needs: verify
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/website-foundation
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-lock-bootstrap
+          path: .lockfile-artifact
+      - name: Commit generated lockfile if it is still missing
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "package-lock.json is already committed; no change needed."
+            exit 0
+          fi
+          cp .lockfile-artifact/package-lock.json package-lock.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "build: add reproducible npm lockfile"
+          git push origin HEAD:feat/website-foundation
