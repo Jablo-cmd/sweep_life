@@ -60,6 +60,15 @@ for (const file of htmlFiles) {
   }
 
   const hasNoIndex = /<meta\s+name=["']robots["']\s+content=["']noindex, nofollow["']/i.test(html);
+  const canonical = html.match(/<link\\s+rel=["']canonical["']\\s+href=["']([^"']+)["']/i)?.[1];
+  if (productionIndexing) {
+    const expectedOrigin = process.env.PUBLIC_SITE_URL.trim().replace(/\\/$/, "");
+    if (!canonical || !canonical.startsWith(expectedOrigin + "/")) {
+      failures.push(page + ": missing canonical URL on the configured production origin");
+    }
+  } else if (canonical) {
+    failures.push(page + ": preview must not emit canonical URLs before production indexing is enabled");
+  }
   const privateRoute = /^(parent-portal|privacy|terms)\/index\.html$/.test(page);
   if ((!productionIndexing || privateRoute) && !hasNoIndex) {
     failures.push(page + ": route should remain noindex until explicitly enabled for production");
@@ -69,7 +78,7 @@ for (const file of htmlFiles) {
   }
 }
 
-const robotsPath = path.join(root, "robots.txt");
+const faviconPath = path.join(root, "favicon.svg");\ntry { await access(faviconPath); } catch { failures.push("favicon.svg: missing site icon asset"); }\n\nconst robotsPath = path.join(root, "robots.txt");
 try {
   const robots = await readFile(robotsPath, "utf8");
   if (!/User-agent:\s*\*/i.test(robots)) failures.push("robots.txt: missing wildcard user-agent rule");
