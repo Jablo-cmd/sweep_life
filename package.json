@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test:routes": "node scripts/check-routes.mjs"
+    "test:routes": "node scripts/check-routes.mjs",
+    "test:quality": "node scripts/check-quality.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
