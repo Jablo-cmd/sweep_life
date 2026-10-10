@@ -17,12 +17,25 @@ jobs:
         with:
           node-version: 22
       - run: npm install
+      - name: Export generated lockfile for reproducible bootstrap
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-lock-bootstrap
+          path: package-lock.json
+          retention-days: 1
       - name: Report dependency advisories
         run: npm audit --audit-level=high
       - run: npm run check
       - run: npm run build
       - run: npm run test:routes
       - run: npm run test:quality
+      - name: Verify production SEO configuration
+        env:
+          PUBLIC_SITE_URL: https://preview.example.invalid
+          PUBLIC_INDEXING_ENABLED: "true"
+        run: |
+          npm run build
+          npm run test:quality
       - name: Verify expected routes
         run: |
           test -f dist/index.html
