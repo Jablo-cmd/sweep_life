@@ -30,7 +30,8 @@ The public site identifies SWEEP Kidz Pre-School and SWEEP Academy Primary Schoo
 
 ## Known gaps / not yet implemented
 - No lockfile yet; dependency installation should be reproducible before production release.
-- No test suite for links, visual regression, accessibility or user flows yet.
+- Automated generated-output checks now cover expected routes, unique titles, descriptions, one H1 per page, image alt text, and safe noindex defaults. These are useful static checks, not a substitute for browser, assistive-technology, or user-flow testing.
+- No browser-based visual regression or full accessibility/user-flow suite yet.
 - No automated Lighthouse/Core Web Vitals budget yet.
 - Images reference Wix-hosted source URLs; they have not been downloaded, optimised, verified at full resolution or permission-cleared.
 - No approved school logo or brand assets; the wordmark is a typographic placeholder.
