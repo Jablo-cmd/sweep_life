@@ -22,3 +22,12 @@
 .form-hint{margin:1.2rem 0;color:var(--muted);font-size:.84rem}
 .form-status{margin:.8rem 0 0;color:var(--green-2);font-size:.9rem}
 @media(max-width:560px){.form-grid{grid-template-columns:1fr}.form-field-wide{grid-column:auto}}
+
+/* Contrast-safe accent text and readable school-calendar table */
+.value-number{color:#805a22}
+.term-table{width:100%;margin:1.25rem 0 2rem;border-collapse:collapse;background:white;font-size:.92rem}
+.term-table caption{caption-side:top;margin-bottom:.7rem;text-align:left;color:var(--muted);font-size:.85rem}
+.term-table th,.term-table td{padding:.8rem .9rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.term-table thead th{background:var(--sage);color:var(--green);font-weight:700}
+.term-table tbody th{font-weight:700;color:var(--ink)}
+@media(max-width:560px){.term-table th,.term-table td{padding:.7rem .55rem;font-size:.84rem}}
