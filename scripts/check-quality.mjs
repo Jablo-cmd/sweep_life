@@ -69,6 +69,13 @@ for (const file of htmlFiles) {
   } else if (canonical) {
     failures.push(page + ": preview must not emit canonical URLs before production indexing is enabled");
   }
+  const hasStructuredData = /<script\s+type=["']application\/ld\+json["']/i.test(html);
+  if (productionIndexing && !hasStructuredData) {
+    failures.push(page + ": missing production educational-organization structured data");
+  }
+  if (!productionIndexing && hasStructuredData) {
+    failures.push(page + ": preview must not emit production organization structured data");
+  }
   const privateRoute = /^(parent-portal|privacy|terms)\/index\.html$/.test(page);
   if ((!productionIndexing || privateRoute) && !hasNoIndex) {
     failures.push(page + ": route should remain noindex until explicitly enabled for production");
