@@ -5,19 +5,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 // have not yet been visually verified or cleared for reuse; captions and alt
 // text remain deliberately neutral until the school confirms image context.
 const images = [
-  ["https://static.wixstatic.com/media/6d8eb9_5a52454d317b43a984f28740a8cd072a~mv2.jpg", "SWEEP Schools gallery photograph 1", "School life"],
-  ["https://static.wixstatic.com/media/6d8eb9_3b8307d3cbde4b518387d7082ee32dfb~mv2.jpg", "SWEEP Schools gallery photograph 2", "Our community"],
+  ["https://static.wixstatic.com/media/6d8eb9_2359c7052ffd4dfcadcc2e08da50d01f~mv2.jpg", "SWEEP Schools gallery photograph 1", "School life"],
+  ["https://static.wixstatic.com/media/6d8eb9_68e8d8e0626b4000a4a6c113623f6e7d~mv2.jpg", "SWEEP Schools gallery photograph 2", "Our community"],
   ["https://static.wixstatic.com/media/6d8eb9_8087b3b328bd4e13b865545df154df87~mv2.jpg", "SWEEP Schools gallery photograph 3", "Learning together"],
   ["https://static.wixstatic.com/media/6d8eb9_6d91acefb903499f8054ad77b007e21b~mv2.jpg", "SWEEP Schools gallery photograph 4", "Everyday moments"],
   ["https://static.wixstatic.com/media/6d8eb9_6358bed11ed6445297f9d320f36e3caa~mv2.jpg", "SWEEP Schools gallery photograph 5", "School life"],
   ["https://static.wixstatic.com/media/6d8eb9_2f037140ec6543e18b00bb2a30b7c5b6~mv2.jpg", "SWEEP Schools gallery photograph 6", "Our community"],
-  ["https://static.wixstatic.com/media/6d8eb9_2359c7052ffd4dfcadcc2e08da50d01f~mv2.jpg", "SWEEP Schools gallery photograph 7", "Learning together"],
-  ["https://static.wixstatic.com/media/6d8eb9_68e8d8e0626b4000a4a6c113623f6e7d~mv2.jpg", "SWEEP Schools gallery photograph 8", "Everyday moments"],
-  ["https://static.wixstatic.com/media/6d8eb9_fa55abcec73f4a7f89ea670546e3e4e0~mv2.jpg", "SWEEP Schools gallery photograph 9", "School life"],
-  ["https://static.wixstatic.com/media/6d8eb9_3a167a4233d7447692a0d5f9c0c48c90~mv2.jpg", "SWEEP Schools gallery photograph 10", "Our community"],
-  ["https://static.wixstatic.com/media/6d8eb9_a9e50f8f104e47fdaae6b77a75896b3f~mv2.jpg", "SWEEP Schools gallery photograph 11", "Learning together"],
-  ["https://static.wixstatic.com/media/6d8eb9_02f1013799284a8e95c5147547ec068f~mv2.jpg", "SWEEP Schools gallery photograph 12", "Everyday moments"],
-  ["https://static.wixstatic.com/media/6d8eb9_8ba2d2946d0f4abaaed753e803e305cb~mv2.jpg", "SWEEP Schools gallery photograph 13", "School life"]
+  ["https://static.wixstatic.com/media/6d8eb9_fa55abcec73f4a7f89ea670546e3e4e0~mv2.jpg", "SWEEP Schools gallery photograph 7", "Learning together"],
+  ["https://static.wixstatic.com/media/6d8eb9_3a167a4233d7447692a0d5f9c0c48c90~mv2.jpg", "SWEEP Schools gallery photograph 8", "Everyday moments"],
+  ["https://static.wixstatic.com/media/6d8eb9_a9e50f8f104e47fdaae6b77a75896b3f~mv2.jpg", "SWEEP Schools gallery photograph 9", "School life"],
+  ["https://static.wixstatic.com/media/6d8eb9_02f1013799284a8e95c5147547ec068f~mv2.jpg", "SWEEP Schools gallery photograph 10", "Our community"],
+  ["https://static.wixstatic.com/media/6d8eb9_8ba2d2946d0f4abaaed753e803e305cb~mv2.jpg", "SWEEP Schools gallery photograph 11", "Learning together"],
+  ["https://static.wixstatic.com/media/99c642_5a135c0b635f4c14a8a440947c9c6059~mv2.jpg", "SWEEP Schools gallery photograph 12", "Everyday moments"],
+  ["https://static.wixstatic.com/media/99c642_4c73b2c6d05246409950ce358ca4a322~mv2.jpg", "SWEEP Schools gallery photograph 13", "School life"]
 ];
 ---
 <BaseLayout title="Gallery" description="Explore photographs from the SWEEP Schools community in Suideroord, Johannesburg. Image reuse and learner-photo consent must be confirmed before launch.">
@@ -31,7 +31,7 @@ const images = [
   <section class="section">
     <div class="container">
       <div class="fee-notice" style="margin-bottom:2rem">
-        <strong>Preview note:</strong> These 13 image references were found in the school's existing public gallery. The images have not yet been visually checked, locally optimised or cleared for reuse. Captions and descriptive alt text must be reviewed against each image, and consent for identifiable learners confirmed, before launch.
+        <strong>Preview note:</strong> These 13 image references were selected in the school's existing public gallery. The images have not yet been visually checked, locally optimised or cleared for reuse. Captions and descriptive alt text must be reviewed against each image, and consent for identifiable learners confirmed, before launch.
       </div>
       <div class="gallery-page-grid">
         {images.map(([src, alt, label]) => (
