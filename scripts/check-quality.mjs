@@ -150,7 +150,7 @@ if (renderedHtml.includes(retiredTreeImageUrl)) failures.push("tree photograph: 
 const homePath = path.join(root, "index.html");
 try {
   const home = await readFile(homePath, "utf8");
-  const homeImageSources = [...home.matchAll(/<img\\b[^>]*\\bsrc=[\"']([^\"']+)[\"']/gi)].map((match) => match[1]);
+  const homeImageSources = [...home.matchAll(/<img\b[^>]*\bsrc=[\"']([^\"']+)[\"']/gi)].map((match) => match[1]);
   const seenHomeSources = new Set();
   const duplicateHomeSources = new Set();
   for (const src of homeImageSources) {
