@@ -19,6 +19,24 @@ const fullTitle = title === "Home"
 // ownership and the production hostname. Preview builds are noindex by default.
 const canonicalUrl = productionIndexingEnabled && siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
 const shouldNoIndex = noIndex || !productionIndexingEnabled;
+const organizationSchema = productionIndexingEnabled && siteUrl
+  ? JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "SWEEP Schools",
+      "url": siteUrl,
+      "telephone": "+27116805938",
+      "email": "schools@sweeplife.co.za",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4 Burger Street, corner Burger and Swartgoud Streets",
+        "addressLocality": "Johannesburg",
+        "addressRegion": "Gauteng",
+        "postalCode": "2091",
+        "addressCountry": "ZA"
+      }
+    })
+  : undefined;
 ---
 <!doctype html>
 <html lang="en-ZA">
@@ -40,6 +58,7 @@ const shouldNoIndex = noIndex || !productionIndexingEnabled;
     <meta name="twitter:card" content="summary_large_image" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {organizationSchema && <script type="application/ld+json" set:html={organizationSchema} />}
     {shouldNoIndex && <meta name="robots" content="noindex, nofollow" />}
     <title>{fullTitle}</title>
   </head>
