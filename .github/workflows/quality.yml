@@ -20,6 +20,7 @@ jobs:
       - run: npm run check
       - run: npm run build
       - run: npm run test:routes
+      - run: npm run test:quality
       - name: Verify expected routes
         run: |
           test -f dist/index.html
