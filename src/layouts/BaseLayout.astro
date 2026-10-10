@@ -19,7 +19,7 @@ const fullTitle = title === "Home"
 // ownership and the production hostname. Preview builds are noindex by default.
 const canonicalUrl = productionIndexingEnabled && siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
 const shouldNoIndex = noIndex || !productionIndexingEnabled;
-const organizationSchema = productionIndexingEnabled && siteUrl
+const organizationSchema = productionIndexingEnabled && siteUrl && !noIndex
   ? JSON.stringify({
       "@context": "https://schema.org",
       "@type": "EducationalOrganization",
