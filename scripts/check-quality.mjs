@@ -1,0 +1,95 @@
+import { readdir, readFile, access } from "node:fs/promises";
+import path from "node:path";
+
+const root = path.resolve("dist");
+const htmlFiles = [];
+async function walk(dir) {
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) await walk(full);
+    else if (entry.isFile() && entry.name.endsWith(".html")) htmlFiles.push(full);
+  }
+}
+
+await walk(root);
+const failures = [];
+const titles = new Map();
+const expectedRoutes = [
+  "index.html",
+  "pre-school/index.html",
+  "primary-school/index.html",
+  "admissions/index.html",
+  "fees/index.html",
+  "gallery/index.html",
+  "about/index.html",
+  "contact/index.html",
+  "parent-portal/index.html",
+  "privacy/index.html",
+  "terms/index.html"
+];
+
+for (const route of expectedRoutes) {
+  try {
+    await access(path.join(root, route));
+  } catch {
+    failures.push(`Missing expected route: /${route.replace(/index\.html$/, "")}`);
+  }
+}
+
+for (const file of htmlFiles) {
+  const html = await readFile(file, "utf8");
+  const page = path.relative(root, file);
+
+  if (!/<html\b[^>]*\blang=["']en-ZA["']/i.test(html)) {
+    failures.push(`${page}: missing South African English document language`);
+  }
+
+  const title = html.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim();
+  if (!title) {
+    failures.push(`${page}: missing or empty title`);
+  } else {
+    if (titles.has(title)) failures.push(`${page}: duplicate title also used by ${titles.get(title)}`);
+    titles.set(title, page);
+  }
+
+  const description = html.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i)?.[1]?.trim();
+  if (!description || description.length < 50 || description.length > 180) {
+    failures.push(`${page}: meta description missing or outside 50–180 characters`);
+  }
+
+  const h1Count = [...html.matchAll(/<h1(?:\s[^>]*)?>/gi)].length;
+  if (h1Count !== 1) failures.push(`${page}: expected exactly one h1, found ${h1Count}`);
+
+  for (const match of html.matchAll(/<img\b([^>]*)>/gi)) {
+    const attrs = match[1];
+    const alt = attrs.match(/\balt=["']([^"']*)["']/i);
+    if (!alt || !alt[1].trim()) failures.push(`${page}: image missing non-empty alt text`);
+  }
+
+  if (/href=["']#["']|href=["']javascript:/i.test(html)) {
+    failures.push(`${page}: contains a placeholder or javascript link`);
+  }
+
+  if (!/<meta\s+name=["']robots["']\s+content=["']noindex, nofollow["']/i.test(html)) {
+    failures.push(`${page}: preview should remain noindex until explicitly enabled for production`);
+  }
+}
+
+const galleryPath = path.join(root, "gallery", "index.html");
+try {
+  const gallery = await readFile(galleryPath, "utf8");
+  const imageCount = [...gallery.matchAll(/class=["']gallery-page-grid["']/g)].length
+    ? (gallery.match(/class=["']gallery-page-grid["'][\s\S]*?<\/div>/i)?.[0].match(/<img\b/gi) ?? []).length
+    : 0;
+  if (imageCount < 13) failures.push(`gallery/index.html: expected at least 13 source gallery images, found ${imageCount}`);
+} catch {
+  failures.push("gallery/index.html: unable to inspect gallery output");
+}
+
+if (failures.length) {
+  console.error("Quality checks failed:");
+  for (const failure of failures) console.error(`- ${failure}`);
+  process.exit(1);
+}
+
+console.log(`Quality checks passed for ${htmlFiles.length} generated HTML pages: unique titles, descriptions, headings, image alt text, preview indexing guard and expected routes.`);
