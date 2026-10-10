@@ -2,8 +2,9 @@
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-interface Props { title: string; description: string; }
-const { title, description } = Astro.props;
+interface Props { title: string; description: string; noIndex?: boolean; }
+const { title, description, noIndex = false } = Astro.props;
 const fullTitle = title === "Home" ? "SWEEP Schools | A foundation for the journey ahead" : `${title} | SWEEP Schools`;
 ---
-<!doctype html><html lang="en-ZA"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#173c34" /><meta name="description" content={description} /><meta property="og:type" content="website" /><meta property="og:site_name" content="SWEEP Schools" /><meta property="og:title" content={fullTitle} /><meta property="og:description" content={description} /><meta name="color-scheme" content="light" /><title>{fullTitle}</title></head><body><a class="skip-link" href="#main-content">Skip to content</a><SiteHeader /><main id="main-content"><slot /></main><SiteFooter /></body></html>
+<!doctype html><html lang="en-ZA"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#173c34" /><meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}<meta property="og:type" content="website" /><meta property="og:site_name" content="SWEEP Schools" /><meta property="og:title" content={fullTitle} /><meta property="og:description" content={description} /><meta name="color-scheme" content="light" /><title>{fullTitle}</title></head><body><a class="skip-link" href="#main-content">Skip to content</a><SiteHeader /><main id="main-content"><slot /></main><SiteFooter /></body></html>
