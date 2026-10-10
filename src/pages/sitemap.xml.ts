@@ -1,5 +1,4 @@
-const siteUrl = import.meta.env.PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
-const indexingEnabled = import.meta.env.PUBLIC_INDEXING_ENABLED === "true" && Boolean(siteUrl);
+import { siteUrl, productionIndexingEnabled } from "../lib/site-config";
 const publicRoutes = [
   "/",
   "/pre-school/",
@@ -12,7 +11,7 @@ const publicRoutes = [
 ];
 
 export function GET() {
-  const urls = indexingEnabled
+  const urls = productionIndexingEnabled
     ? publicRoutes.map((route) => `  <url><loc>${siteUrl}${route}</loc></url>`).join("\n")
     : "";
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
