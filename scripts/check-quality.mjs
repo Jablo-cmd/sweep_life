@@ -60,9 +60,9 @@ for (const file of htmlFiles) {
   }
 
   const hasNoIndex = /<meta\s+name=["']robots["']\s+content=["']noindex, nofollow["']/i.test(html);
-  const canonical = html.match(/<link\\s+rel=["']canonical["']\\s+href=["']([^"']+)["']/i)?.[1];
+  const canonical = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i)?.[1];
   if (productionIndexing) {
-    const expectedOrigin = process.env.PUBLIC_SITE_URL.trim().replace(/\\/$/, "");
+    const expectedOrigin = process.env.PUBLIC_SITE_URL.trim().replace(/\/$/, "");
     if (!canonical || !canonical.startsWith(expectedOrigin + "/")) {
       failures.push(page + ": missing canonical URL on the configured production origin");
     }
