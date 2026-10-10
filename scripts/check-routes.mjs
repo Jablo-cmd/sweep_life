@@ -14,7 +14,7 @@ await walk(root);
 const broken = [];
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
-  for (const match of html.matchAll(/\\bhref=["']([^"'#]+)["']/g)) {
+  for (const match of html.matchAll(/\bhref=["']([^"'#]+)["']/g)) {
     const href = match[1].trim();
     if (!href.startsWith("/") || href.startsWith("//")) continue;
     const pathname = decodeURIComponent(href.split(/[?#]/)[0]);
